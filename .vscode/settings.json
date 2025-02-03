@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "0ec167ee48ac79d4d875512a1e326c38.sln"
+    "dotnet.defaultSolution": "ncs2501Ruby.sln"
 }
