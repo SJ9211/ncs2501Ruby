@@ -18,7 +18,7 @@ public class RubyController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         // GetAxisLaw를 사용하면 -1,1값이 넘어온다
-        //float vertical = Input.GetAxisRaw("Vertical");
+        // float vertical = Input.GetAxisRaw("Vertical");
         // Debug.Log($"H:{horizontal}");
         // Debug.Log($"V:{vertical}");
         //Debug.Log(horizontal);
