@@ -6,8 +6,11 @@ public class RubyController : MonoBehaviour
 {
     public int maxHealth = 5;
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 6.0f;
     public int health { get { return currentHealth; } }
+    public float timeInvincible = 2.0f;
+    bool isInvincible;
+    private float invincibleTimer;
     private int currentHealth;
     private Rigidbody2D rb2d;
     void Start()
@@ -34,14 +37,30 @@ public class RubyController : MonoBehaviour
         position.x += moveSpeed * horizontal * Time.deltaTime;
         position.y += moveSpeed * vertical * Time.deltaTime;
         rb2d.MovePosition(position);
+
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if ( invincibleTimer < 0)
+                 isInvincible = false;
+        }
     }
     public void ChangeHealth(int amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        
         //Debug.Log($"{currentHealth / maxHealth}");  // string 보관용
-       Debug.Log(currentHealth + "/" + maxHealth);
+        if ( amount < 0)
+        {
+            if (isInvincible)
+                return;
+
+                isInvincible = true;
+                invincibleTimer = timeInvincible;
+        }
+     currentHealth = Mathf.Clamp( currentHealth +amount, 0, maxHealth);
+     Debug.Log($"{currentHealth}/{maxHealth}");
     }
-}
+     }
 /*
 충돌 ~ collider  {OnCollisionEnter2D, OnCollisionStay2D, OnCollisionExit2D}
                   OnTriggerEnter2D, OnTriggerStay2D , OnTriggerExit2D
