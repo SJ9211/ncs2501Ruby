@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    
     public float moveSpeed = 4.0f;
     public bool vertical;
     public float changTime = 3.0f;
@@ -14,15 +14,19 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb2d;
     float timer;
     int direction = 1;
+    private Animator animator;
 
+    private Vector2 position;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         timer = changTime;
+        position = rb2d.position;
+        animator = GetComponent<Animator>();
     }
 
-
+    // Animator 에서 쓸 내용은 코드랑 대소문자 꼭 똑같이하기 !!
     void Update()
     {
         timer -= Time.deltaTime;
@@ -33,14 +37,17 @@ public class EnemyController : MonoBehaviour
             timer = changTime;
         }
 
-        Vector2 position = rb2d.position;
         if (vertical)
         {
-            position.x += moveSpeed * direction * Time.deltaTime;
+            animator.SetFloat("MoveX", 0);
+            animator.SetFloat("MoveY", direction);
+            position.y += moveSpeed * direction * Time.deltaTime;
         }
         else
         {
-            position.y += moveSpeed * direction * Time.deltaTime;
+            animator.SetFloat("MoveX", direction);
+            animator.SetFloat("MoveY", 0);
+            position.x += moveSpeed * direction * Time.deltaTime;
         }
         rb2d.MovePosition(position);
 
