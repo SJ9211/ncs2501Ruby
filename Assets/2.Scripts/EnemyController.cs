@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    
+
     public float moveSpeed = 4.0f;
     public bool vertical;
     public float changTime = 3.0f;
+    public int needFix = 3;
 
     private Rigidbody2D rb2d;
     float timer;
@@ -17,6 +18,8 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
 
     private Vector2 position;
+    private bool broken;
+    private int fixedCount;
 
     void Start()
     {
@@ -24,13 +27,19 @@ public class EnemyController : MonoBehaviour
         timer = changTime;
         position = rb2d.position;
         animator = GetComponent<Animator>();
+        broken = true;
+        fixedCount = 0;
     }
 
     // Animator 에서 쓸 내용은 코드랑 대소문자 꼭 똑같이하기 !!
     void Update()
     {
-        timer -= Time.deltaTime;
+        if( !broken )
+        {
+            return;
+        }
 
+        timer -= Time.deltaTime;
         if (timer < 0)
         {
             direction = -direction;
@@ -51,16 +60,29 @@ public class EnemyController : MonoBehaviour
         }
         rb2d.MovePosition(position);
 
+    }
+   
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        // RubyController player = other.gameObject.GetComponent<RubyController>();
 
-        void OnCollisionEnter2D(Collision2D other)
+        if (gameObject.TryGetComponent<RubyController>(out var player))
+        // if (player != null)
         {
-           // RubyController player = other.gameObject.GetComponent<RubyController>();
-            
-            if ( gameObject.TryGetComponent<RubyController>(out var player))
-           // if (player != null)
-            {
-                player.ChangeHealth(-1);
-            }
+            player.ChangeHealth(-1);
         }
+    }
+
+    public void Fix()
+    {
+       if ( fixedCount >= needFix)
+       {
+       broken = false;
+        rb2d.simulated = false;
+       }
+       else
+       {
+        fixedCount++;
+       }
     }
 }

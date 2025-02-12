@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -10,6 +11,7 @@ public class RubyController : MonoBehaviour
     public float moveSpeed = 4.0f;
     public int health { get { return currentHealth; } }
     public float timeInvincible = 2.0f;
+    public GameObject projectilePrefab;
     bool isInvincible;
     private float invincibleTimer;
     private int currentHealth;
@@ -61,6 +63,10 @@ public class RubyController : MonoBehaviour
             if ( invincibleTimer < 0)
                  isInvincible = false;
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Launch();
+        }
     }
     public void ChangeHealth(int amount)
     {
@@ -74,12 +80,25 @@ public class RubyController : MonoBehaviour
 
                 isInvincible = true;
                 invincibleTimer = timeInvincible;
-                 animator.SetTrigger("Hit");
+                animator.SetTrigger("Hit");
         }
      currentHealth = Mathf.Clamp( currentHealth +amount, 0, maxHealth);
      Debug.Log($"{currentHealth}/{maxHealth}");
     }
-     }
+
+    private void Launch()
+    {
+        GameObject projectileObject = Instantiate(
+            projectilePrefab,
+            rb2d.position + Vector2.up * 0.5f,
+            quaternion.identity);
+        Projectile projectile = projectileObject.
+                    GetComponent<Projectile>();
+        projectile.Launch(lookDirection, 300);
+
+        animator.SetTrigger("Launch");
+    }
+ }
 /*
 충돌 ~ collider  {OnCollisionEnter2D, OnCollisionStay2D, OnCollisionExit2D}
                   OnTriggerEnter2D, OnTriggerStay2D , OnTriggerExit2D
