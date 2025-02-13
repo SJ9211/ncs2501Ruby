@@ -150,6 +150,7 @@ MonoBehaviour:
   moveSpeed: 10
   vertical: 0
   changTime: 2
+  needFix: 3
 --- !u!95 &8552307255940774292
 Animator:
   serializedVersion: 5
