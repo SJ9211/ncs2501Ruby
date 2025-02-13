@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     public bool vertical;
     public float changTime = 3.0f;
     public int needFix = 3;
+    public ParticleSystem smokeEffect;
+    
 
     private Rigidbody2D rb2d;
     float timer;
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 position;
     private bool broken;
     private int fixedCount;
+    
 
     void Start()
     {
@@ -75,21 +78,21 @@ public class EnemyController : MonoBehaviour
 
     public void Fix()
     {
-      
-      broken = false;
-      rb2d.simulated = false;
-      animator.SetTrigger("Fixed");
-      /*
-       if ( fixedCount >= needFix)
-       {
-       broken = false;
-        rb2d.simulated = false;
-       }
-       else
-       {
+
+        //   broken = false;
+        //   rb2d.simulated = false;
+        //   animator.SetTrigger("Fixed");
         fixedCount++;
-       }
-       animator.SetTrigger("Fixed");
-       */
+        if (fixedCount >= needFix)
+        {
+            broken = false;
+            rb2d.simulated = false;
+            animator.SetTrigger("Fixed");
+            smokeEffect.Stop();
+           
+        }
+
+
+
     }
 }

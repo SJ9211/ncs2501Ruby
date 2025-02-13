@@ -12,6 +12,8 @@ public class RubyController : MonoBehaviour
     public int health { get { return currentHealth; } }
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
+    public ParticleSystem collEffectprefab;
+    
     bool isInvincible;
     private float invincibleTimer;
     private int currentHealth;
