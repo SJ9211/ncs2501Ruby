@@ -77,20 +77,22 @@ public class RubyController : MonoBehaviour
     }
     public void ChangeHealth(int amount)
     {
-        
+
         //Debug.Log($"{currentHealth / maxHealth}");  // string 보관용
-        if ( amount < 0)
+        if (amount < 0)
         {
-           
+            animator.SetTrigger("Hit");
             if (isInvincible)
                 return;
 
-                isInvincible = true;
-                invincibleTimer = timeInvincible;
-                animator.SetTrigger("Hit");
+            isInvincible = true;
+            invincibleTimer = timeInvincible;
+            Instantiate(collEffectprefab, rb2d.position + Vector2.up * 0.2f, quaternion.identity);
         }
-     currentHealth = Mathf.Clamp( currentHealth +amount, 0, maxHealth);
-     Debug.Log($"{currentHealth}/{maxHealth}");
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log($"{currentHealth}/{maxHealth}");
+        UIHealthBar.instance.SetValue(currentHealth/(float)maxHealth);
+        
     }
 
     private void Launch()
