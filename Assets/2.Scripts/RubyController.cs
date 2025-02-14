@@ -6,14 +6,16 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class RubyController : MonoBehaviour
 {
-    
+    #region public
     public int maxHealth = 5;
     public float moveSpeed = 4.0f;
     public int health { get { return currentHealth; } }
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
     public ParticleSystem collEffectprefab;
-    
+    #endregion
+
+    #region  private
     bool isInvincible;
     private float invincibleTimer;
     private int currentHealth;
@@ -21,6 +23,7 @@ public class RubyController : MonoBehaviour
     private Vector2 position;
     Animator animator;
     private Vector2 lookDirection = new Vector2(1,0);
+    #endregion
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -45,6 +48,7 @@ public class RubyController : MonoBehaviour
         //Debug.LogWarning("Warnig");
         //Debug.LogError("Error!!!");
         Vector2 move = new Vector2(horizontal, vertical);
+        
         if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             lookDirection.Set(move.x, move.y);
@@ -65,6 +69,7 @@ public class RubyController : MonoBehaviour
             if ( invincibleTimer < 0)
                  isInvincible = false;
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Launch();

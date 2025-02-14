@@ -20,9 +20,9 @@ public class Projectile : MonoBehaviour
     }
 
     public void Launch(Vector2 direction, float force)
- {
-    rb2d.AddForce (direction * force);
- }
+    {
+        rb2d.AddForce(direction * force);
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {

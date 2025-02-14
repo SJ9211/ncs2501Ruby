@@ -6,14 +6,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    #region  public val
     public float moveSpeed = 4.0f;
     public bool vertical;
     public float changTime = 3.0f;
     public int needFix = 3;
     public ParticleSystem smokeEffect;
-    
+    #endregion  
 
+    #region  private val
     private Rigidbody2D rb2d;
     float timer;
     int direction = 1;
@@ -22,7 +23,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 position;
     private bool broken;
     private int fixedCount;
-    
+    #endregion
 
     void Start()
     {
@@ -78,7 +79,6 @@ public class EnemyController : MonoBehaviour
 
     public void Fix()
     {
-
         //   broken = false;
         //   rb2d.simulated = false;
         //   animator.SetTrigger("Fixed");
@@ -88,11 +88,7 @@ public class EnemyController : MonoBehaviour
             broken = false;
             rb2d.simulated = false;
             animator.SetTrigger("Fixed");
-            smokeEffect.Stop();
-           
+            smokeEffect.Stop();         
         }
-
-
-
     }
 }
