@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -12,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public float changTime = 3.0f;
     public int needFix = 3;
     public ParticleSystem smokeEffect;
+    public GameObject dialogBox;
     #endregion  
 
     #region  private val
@@ -38,7 +40,7 @@ public class EnemyController : MonoBehaviour
     // Animator 에서 쓸 내용은 코드랑 대소문자 꼭 똑같이하기 !!
     void Update()
     {
-        if( !broken )
+        if (!broken)
         {
             return;
         }
@@ -65,7 +67,7 @@ public class EnemyController : MonoBehaviour
         rb2d.MovePosition(position);
 
     }
-   
+
     void OnCollisionEnter2D(Collision2D other)
     {
         // RubyController player = other.gameObject.GetComponent<RubyController>();
@@ -88,7 +90,7 @@ public class EnemyController : MonoBehaviour
             broken = false;
             rb2d.simulated = false;
             animator.SetTrigger("Fixed");
-            smokeEffect.Stop();         
+            smokeEffect.Stop();
         }
     }
 }
