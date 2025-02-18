@@ -13,7 +13,10 @@ public class EnemyController : MonoBehaviour
     public float changTime = 3.0f;
     public int needFix = 3;
     public ParticleSystem smokeEffect;
-    public GameObject dialogBox;
+    
+    public AudioClip walkClip;
+
+   
     #endregion  
 
     #region  private val
@@ -21,7 +24,7 @@ public class EnemyController : MonoBehaviour
     float timer;
     int direction = 1;
     private Animator animator;
-
+    public RubyController Ruby;
     private Vector2 position;
     private bool broken;
     private int fixedCount;
@@ -70,10 +73,10 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        // RubyController player = other.gameObject.GetComponent<RubyController>();
+         RubyController player = other.gameObject.GetComponent<RubyController>();
 
-        if (gameObject.TryGetComponent<RubyController>(out var player))
-        // if (player != null)
+        //if (gameObject.TryGetComponent<RubyController>(out var player))
+         if (player != null)
         {
             player.ChangeHealth(-1);
         }
@@ -91,6 +94,9 @@ public class EnemyController : MonoBehaviour
             rb2d.simulated = false;
             animator.SetTrigger("Fixed");
             smokeEffect.Stop();
+            // Ruby 에게 fixd 알리기
+            GameObject.FindWithTag("RUBY");
+            
         }
     }
 }

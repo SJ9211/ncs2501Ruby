@@ -6,13 +6,13 @@ public class DamageZone : MonoBehaviour
 {
     void OnTriggerStay2D(Collider2D other)
     {
-        //RubyController controller = other.GetComponent<RubyController>();
-        //if ( controller != null)
+        RubyController player= other.GetComponent<RubyController>();
+        if ( player != null)
 
         // out var . contrioller 형태 신경X 
-        if ( other.TryGetComponent<RubyController>(out var controller))
+       // if ( other.TryGetComponent<RubyController>(out var controller))
         {
-            controller.ChangeHealth(-1);
+            player.ChangeHealth(-1);
         }
     }
 }
