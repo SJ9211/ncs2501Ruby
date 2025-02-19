@@ -13,11 +13,11 @@ public class EnemyController : MonoBehaviour
     public float changTime = 3.0f;
     public int needFix = 3;
     public ParticleSystem smokeEffect;
-    
+
     public AudioClip walkClip;
 
-   
-    #endregion  
+
+    #endregion
 
     #region  private val
     private Rigidbody2D rb2d;
@@ -73,10 +73,10 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-         RubyController player = other.gameObject.GetComponent<RubyController>();
+        RubyController player = other.gameObject.GetComponent<RubyController>();
 
         //if (gameObject.TryGetComponent<RubyController>(out var player))
-         if (player != null)
+        if (player != null)
         {
             player.ChangeHealth(-1);
         }
@@ -96,7 +96,12 @@ public class EnemyController : MonoBehaviour
             smokeEffect.Stop();
             // Ruby 에게 fixd 알리기
             GameObject.FindWithTag("RUBY");
+            // jambi 에게 fixed 알리기
+            NPC jambi = GameObject.FindWithTag("JAMBI").GetComponent<NPC>();
+           if ( jambi.NoticeRobotFixed())
+           {
             
+           }
         }
     }
 }
