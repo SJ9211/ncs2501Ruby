@@ -4,6 +4,11 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
+
+/*
+충돌 ~ collider  {OnCollisionEnter2D, OnCollisionStay2D, OnCollisionExit2D}
+                  OnTriggerEnter2D, OnTriggerStay2D , OnTriggerExit2D
+*/
 public class RubyController : MonoBehaviour
 {
     #region public
@@ -153,7 +158,3 @@ public class RubyController : MonoBehaviour
 
     }
 }
-/*
-충돌 ~ collider  {OnCollisionEnter2D, OnCollisionStay2D, OnCollisionExit2D}
-                  OnTriggerEnter2D, OnTriggerStay2D , OnTriggerExit2D
-*/
